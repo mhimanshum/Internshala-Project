@@ -12,12 +12,19 @@
   <body style="background-color: #95dde0">
     <div>
       <div>
-        <h1 style="text-align: center; margin-top: 10%; size: 500px; font-family: cursive">
+        <h1
+          style="
+            text-align: center;
+            margin-top: 10%;
+            size: 500px;
+            font-family: cursive;
+          "
+        >
           REGISTER YOURSELF
         </h1>
         <card>
           <div style="text-align: center">
-            <form>
+            <form id="signupForm">
               <div
                 style="
                   align-items: center;
@@ -28,6 +35,7 @@
                 "
               >
                 <input
+                  id="name"
                   type="text"
                   required
                   placeholder="Please enter your name"
@@ -57,6 +65,7 @@
                 "
               >
                 <input
+                  id="contactNumber"
                   type="number"
                   required
                   placeholder="Please enter your phone no"
@@ -86,6 +95,7 @@
                 "
               >
                 <input
+                  id="email"
                   type="email"
                   required
                   placeholder="Please enter email"
@@ -115,6 +125,7 @@
                 "
               >
                 <input
+                  id="password"
                   type="password"
                   required
                   placeholder="Please enter secret password"
@@ -154,4 +165,17 @@
       </div>
     </div>
   </body>
+  <script>
+    function performSignup(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const contactNumber = document.getElementById('contactNumber').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      alert('Sign up successful');
+    }
+
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', performSignup);
+  </script>
 </html>

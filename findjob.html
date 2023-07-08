@@ -18,7 +18,7 @@
         >
       </div>
       <div style="text-align: center">
-        <form>
+        <form id="search-form">
           <div
             style="
               align-items: center;
@@ -29,6 +29,7 @@
             "
           >
             <input
+              id="location-input"
               type="location"
               required
               placeholder="Enter job location"
@@ -58,6 +59,7 @@
             "
           >
             <input
+              id="role-input"
               type="text"
               required
               placeholder="Enter job role"
@@ -89,10 +91,73 @@
               font-size: x-large;
             "
           >
-            SUBMIT 
+            SUBMIT
           </button>
         </form>
+        <h2>Candidate List</h2>
+        <ul
+          id="candidate-list"
+          class="candidate-list"
+          style="list-style-type: none; padding: 0%"
+        ></ul>
       </div>
     </div>
   </body>
+  <script>
+    const candidates = [
+      {
+        name: 'Manmohan Mishra',
+        location: 'Uttar Pradesh',
+        role: 'Software Engineer',
+      },
+      {
+        name: 'Brijesh Pandey',
+        location: 'Uttar Pradesh',
+        role: 'UI/UX Designer',
+      },
+      { name: 'Aman Sodhi', location: 'Punjab', role: 'Data Analyst' },
+      {
+        name: 'Pankaj Tripathi',
+        location: 'Delhi',
+        role: 'Project Manager',
+      },
+    ];
+
+    function filterCandidates(location, role) {
+      return candidates.filter(
+        (candidate) =>
+          candidate.location.toLowerCase().includes(location.toLowerCase()) &&
+          candidate.role.toLowerCase().includes(role.toLowerCase()),
+      );
+    }
+
+    function displayCandidates(filteredCandidates) {
+      const candidateList = document.getElementById('candidate-list');
+      candidateList.innerHTML = '';
+
+      if (filteredCandidates.length === 0) {
+        candidateList.innerHTML = '<li>No candidates found.</li>';
+        return;
+      }
+
+      filteredCandidates.forEach((candidate) => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('candidate-list-item');
+        listItem.textContent = `${candidate.name} - ${candidate.location} - ${candidate.role}`;
+        candidateList.appendChild(listItem);
+      });
+    }
+
+    document
+      .getElementById('search-form')
+      .addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const location = document.getElementById('location-input').value;
+        const role = document.getElementById('role-input').value;
+
+        const filteredCandidates = filterCandidates(location, role);
+        displayCandidates(filteredCandidates);
+      });
+  </script>
 </html>

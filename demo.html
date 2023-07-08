@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Candidate Search</title>
+    <style>
+      /* CSS styling for the candidate list */
+      .candidate-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .candidate-list-item {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Candidate Search</h1>
+
+    <!-- Search form -->
+    <form id="search-form">
+      <label for="location-input">Location:</label>
+      <input type="text" id="location-input" />
+      <label for="role-input">Job Role:</label>
+      <input type="text" id="role-input" />
+      <button type="submit">Search</button>
+    </form>
+
+    <hr />
+
+    <!-- Candidate list -->
+    <h2>Candidate List</h2>
+    <ul id="candidate-list" class="candidate-list"></ul>
+
+    <script>
+      // JavaScript code to handle search and candidate list
+
+      // Mock data for candidates
+      const candidates = [
+        { name: 'John Doe', location: 'New York', role: 'Software Engineer' },
+        {
+          name: 'Jane Smith',
+          location: 'San Francisco',
+          role: 'UI/UX Designer',
+        },
+        { name: 'Michael Johnson', location: 'Chicago', role: 'Data Analyst' },
+        {
+          name: 'Emily Davis',
+          location: 'Los Angeles',
+          role: 'Project Manager',
+        },
+        // Add more candidates as needed
+      ];
+
+      // Function to filter candidates based on location and role
+      function filterCandidates(location, role) {
+        return candidates.filter(
+          (candidate) =>
+            candidate.location.toLowerCase().includes(location.toLowerCase()) &&
+            candidate.role.toLowerCase().includes(role.toLowerCase()),
+        );
+      }
+
+      // Function to display the filtered candidates
+      function displayCandidates(filteredCandidates) {
+        const candidateList = document.getElementById('candidate-list');
+        candidateList.innerHTML = '';
+
+        if (filteredCandidates.length === 0) {
+          candidateList.innerHTML = '<li>No candidates found.</li>';
+          return;
+        }
+
+        filteredCandidates.forEach((candidate) => {
+          const listItem = document.createElement('li');
+          listItem.classList.add('candidate-list-item');
+          listItem.textContent = `${candidate.name} - ${candidate.location} - ${candidate.role}`;
+          candidateList.appendChild(listItem);
+        });
+      }
+
+      // Event listener for the search form submission
+      document
+        .getElementById('search-form')
+        .addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          const location = document.getElementById('location-input').value;
+          const role = document.getElementById('role-input').value;
+
+          const filteredCandidates = filterCandidates(location, role);
+          displayCandidates(filteredCandidates);
+        });
+    </script>
+  </body>
+</html>

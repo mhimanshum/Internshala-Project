@@ -19,7 +19,7 @@
       </div>
       <card>
         <div style="text-align: center">
-          <form>
+          <form id="loginForm">
             <div
               style="
                 align-items: center;
@@ -30,6 +30,7 @@
               "
             >
               <input
+                id="username"
                 type="text"
                 required
                 placeholder="Please enter your name"
@@ -59,6 +60,7 @@
               "
             >
               <input
+                id="password"
                 type="password"
                 required
                 placeholder="Please enter secret password"
@@ -97,4 +99,19 @@
       </card>
     </div>
   </body>
+  <script>
+    function performLogin(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (username === 'admin' && password === 'password') {
+        alert('Login successful');
+      } else {
+        alert('Invalid username or password');
+      }
+    }
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', performLogin);
+  </script>
 </html>
